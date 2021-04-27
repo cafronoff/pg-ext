@@ -1,4 +1,4 @@
-module github.com/cafronoff/log-hooks/pg-ext
+module github.com/cafronoff/pg-ext
 
 go 1.16
 
