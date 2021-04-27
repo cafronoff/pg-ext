@@ -31,12 +31,13 @@ func (d DbLogger) BeforeQuery(ctx context.Context, _ *pg.QueryEvent) (context.Co
 	return ctx, nil
 }
 
-func (d DbLogger) AfterQuery(q *pg.QueryEvent) {
+func (d DbLogger) AfterQuery(ctx context.Context, q *pg.QueryEvent) error {
 	query, err := q.UnformattedQuery()
 	if err != nil {
 		d.ErrFunc(err)
 	}
 	d.LogFunc(string(query), q.Params)
+	return nil
 }
 
 //GetCurrentSchema Get current schema
