@@ -27,7 +27,9 @@ type DbLogger struct {
 	ErrFunc func(err error)
 }
 
-func (d DbLogger) BeforeQuery(_ context.Context, _ *pg.QueryEvent) {}
+func (d DbLogger) BeforeQuery(ctx context.Context, _ *pg.QueryEvent) (context.Context, error) {
+	return ctx, nil
+}
 
 func (d DbLogger) AfterQuery(q *pg.QueryEvent) {
 	query, err := q.UnformattedQuery()
