@@ -1,6 +1,7 @@
 package pg_ext
 
 import (
+	"context"
 	"strings"
 
 	"github.com/go-pg/migrations/v8"
@@ -26,7 +27,7 @@ type DbLogger struct {
 	ErrFunc func(err error)
 }
 
-func (d DbLogger) BeforeQuery(_ *pg.QueryEvent) {}
+func (d DbLogger) BeforeQuery(_ context.Context, _ *pg.QueryEvent) {}
 
 func (d DbLogger) AfterQuery(q *pg.QueryEvent) {
 	query, err := q.UnformattedQuery()
